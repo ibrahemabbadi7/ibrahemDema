@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مفاجأة إلى ديما</title>
+    <style>
+        body {
+            background-color: #fef3f4;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            color: #333;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #d00;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5em;
+            color: #333;
+            margin: 15px 0;
+        }
+
+        .image-container {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .small-image {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .image-container img,
+        .small-image img {
+            width: 150px;
+            height: auto;
+        }
+
+        .additional-element {
+            position: absolute;
+            background-size: cover;
+        }
+
+        .top-left {
+            top: 20px;
+            left: 20px;
+            background: url('https://via.placeholder.com/50/ff69b4/ffffff?text=') no-repeat center center;
+            background-size: cover;
+        }
+
+        .bottom-right {
+            bottom: 20px;
+            right: 20px;
+            background: url('https://via.placeholder.com/50/ffb6c1/ffffff?text=') no-repeat center center;
+            background-size: cover;
+        }
+
+        .dima-popup {
+            position: absolute;
+            display: none;
+            font-size: 2.5em;
+            color: #ff1493;
+            text-align: center;
+        }
+
+        .click-here {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #ff69b4;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        .click-here:hover {
+            background-color: #ff1493;
+        }
+
+        /* تصميم القلب الصغير المتحرك */
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            color: #ff69b4;
+            animation: moveHeart 10s infinite linear;
+        }
+
+        @keyframes moveHeart {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(100vw, 100vh);
+            }
+        }
+
+        /* تصميم القلب الثابت في الزاوية اليسرى العلوية */
+        .fixed-heart {
+            position: absolute;
+            top: 70px; /* المسافة من الأعلى */
+            left: 20px; /* المسافة من اليسار */
+            width: 50px;
+            height: 50px;
+            background: url('https://i.imgur.com/MYzW9Pq.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        /* تصميم الصورة الصغيرة في الزاوية اليسرى العلوية */
+        .top-left-image {
+            position: absolute;
+            top: 20px; /* المسافة من الأعلى */
+            left: 20px; /* المسافة من اليسار */
+            width: 60px;
+            height: 60px;
+            background: url('https://i.pinimg.com/564x/a2/42/e4/a242e47a8946da7d377f53a28ae2698c.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>أحبك والله</h1>
+    
+    <p>أسف لأني زعلتك يروحي</p>
+
+    <div class="image-container">
+        <img src="https://i.pinimg.com/564x/79/42/ce/7942ce5156159209f695cdef2dce023a.jpg" alt="Image">
+    </div>
+    
+    <div class="small-image">
+        <img src="https://i.pinimg.com/originals/2b/7c/4c/2b7c4c7a8c5a91229c724d22c563817a.jpg" alt="Small Image">
+    </div>
+
+    <div class="top-left additional-element"></div>
+    <div class="bottom-right additional-element"></div>
+
+    <div id="dima-popup" class="dima-popup">
+        ديما
+    </div>
+
+    <div class="click-here" onclick="window.location.href='https://www.youtube.com/watch?v=-x7_KL_lsv4'">
+        انقر هنا
+    </div>
+
+    <audio id="background-music" autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- إضافة القلب الصغير المتحرك -->
+    <div id="heart" class="heart">❤️</div>
+
+    <!-- الصورة الصغيرة في الزاوية اليسرى العلوية -->
+    <div class="top-left-image"></div>
+
+    <!-- القلب الثابت في الزاوية اليسرى العلوية تحت الصورة -->
+    <div class="fixed-heart"></div>
+
+    <script>
+        document.body.addEventListener('click', function(event) {
+            const dimaPopup = document.getElementById('dima-popup');
+            dimaPopup.style.display = 'block';
+            dimaPopup.style.left = `${event.clientX}px`;
+            dimaPopup.style.top = `${event.clientY}px`;
+
+            setTimeout(() => {
+                dimaPopup.style.display = 'none';
+            }, 2000);
+        });
+
+        // لتحريك القلب بشكل عشوائي
+        function randomPosition(element) {
+            const x = Math.floor(Math.random() * window.innerWidth);
+            const y = Math.floor(Math.random() * window.innerHeight);
+            element.style.left = `${x}px`;
+            element.style.top = `${y}px`;
+        }
+
+        const heart = document.getElementById('heart');
+        setInterval(() => randomPosition(heart), 1000);
+    </script>
+</body>
+</html>
